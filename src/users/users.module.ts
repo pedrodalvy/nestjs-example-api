@@ -6,8 +6,14 @@ import { UserRepository } from './repositories/user.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { FindAllUsersService } from './services/find-all-users.service';
 import { FindOneUserService } from './services/find-one-user.service';
+import { UpdateUserService } from './services/update-user.service';
 
-const services = [CreateUserService, FindAllUsersService, FindOneUserService];
+const services = [
+  CreateUserService,
+  FindAllUsersService,
+  FindOneUserService,
+  UpdateUserService,
+];
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserRepository])],
