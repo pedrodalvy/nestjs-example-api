@@ -11,8 +11,8 @@ import { UpdateUserService } from '../services/update-user.service';
 export class UsersResolver {
   constructor(
     private readonly createUserService: CreateUserService,
-    private readonly findAllUsers: FindAllUsersService,
-    private readonly findOneUser: FindOneUserService,
+    private readonly findAllUsersService: FindAllUsersService,
+    private readonly findOneUserService: FindOneUserService,
     private readonly updateUserService: UpdateUserService,
   ) {}
 
@@ -25,16 +25,16 @@ export class UsersResolver {
 
   @Query(() => [User], { name: 'users' })
   async findAll() {
-    return this.findAllUsers.execute();
+    return this.findAllUsersService.execute();
   }
 
   @Query(() => User, { name: 'user' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.findOneUser.execute({ id });
+  async findOne(@Args('id', { type: () => Int }) id: number) {
+    return this.findOneUserService.execute({ id });
   }
 
   @Mutation(() => User)
-  updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
+  async updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
     return this.updateUserService.execute(updateUserInput);
   }
 
