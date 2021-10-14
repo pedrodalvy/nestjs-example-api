@@ -7,12 +7,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { FindAllUsersService } from './services/find-all-users.service';
 import { FindOneUserService } from './services/find-one-user.service';
 import { UpdateUserService } from './services/update-user.service';
+import { DeleteUserService } from './services/delete-user.service';
 
 const services = [
   CreateUserService,
   FindAllUsersService,
   FindOneUserService,
   UpdateUserService,
+  DeleteUserService,
 ];
 
 @Module({
