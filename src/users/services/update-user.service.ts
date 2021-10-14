@@ -12,6 +12,7 @@ export class UpdateUserService {
 
     user.name = name;
     user.email = email;
+    user.updatedAt = new Date();
 
     return this.repository.save(user);
   }
