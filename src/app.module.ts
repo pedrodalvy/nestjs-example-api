@@ -15,6 +15,7 @@ const modules = [UsersModule];
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.qgl',
       playground: true,
+      installSubscriptionHandlers: true,
     }),
   ],
   controllers: [AppController],

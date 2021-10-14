@@ -1,4 +1,11 @@
-import { Resolver, Mutation, Args, Query, Int } from '@nestjs/graphql';
+import {
+  Resolver,
+  Mutation,
+  Args,
+  Query,
+  Int,
+  Subscription,
+} from '@nestjs/graphql';
 import { User } from '../entities/user.entity';
 import { CreateUserInput } from '../dto/create-user.input';
 import { UpdateUserInput } from '../dto/update-user.input';
@@ -9,6 +16,9 @@ import {
   FindOneUserService,
   UpdateUserService,
 } from '../services';
+import { PubSub } from 'graphql-subscriptions';
+
+const pubSub = new PubSub();
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -24,7 +34,11 @@ export class UsersResolver {
   async createUser(
     @Args('createUserInput') createUserInput: CreateUserInput,
   ): Promise<User> {
-    return this.createUserService.execute(createUserInput);
+    const user = await this.createUserService.execute(createUserInput);
+
+    await pubSub.publish('userAdded', { userAdded: user });
+
+    return user;
   }
 
   @Query(() => [User], { name: 'users' })
@@ -45,5 +59,10 @@ export class UsersResolver {
   @Mutation(() => User)
   removeUser(@Args('id', { type: () => Int }) id: number) {
     return this.deleteUserService.execute({ id });
+  }
+
+  @Subscription(() => User)
+  async userAdded() {
+    return pubSub.asyncIterator('userAdded');
   }
 }
