@@ -29,7 +29,7 @@ export class User {
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @Field()
+  @Field({ nullable: true })
   @CreateDateColumn({ name: 'updated_at' })
-  updatedAt: Date;
+  updatedAt?: Date;
 }
