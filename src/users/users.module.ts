@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { UsersResolver } from './users.resolver';
+import { UsersResolver } from './resolvers/users.resolver';
 import { IsUniqueEmailValidator } from './dto/validators/is-unique-email.validator';
 import { CreateUserService } from './services/create-user.service';
 import { UserRepository } from './repositories/user.repository';
