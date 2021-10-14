@@ -4,9 +4,15 @@ import { IsUniqueEmailValidator } from './dto/validators/is-unique-email.validat
 import { CreateUserService } from './services/create-user.service';
 import { UserRepository } from './repositories/user.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { FindAllUsersService } from './services/find-all-users.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserRepository])],
-  providers: [UsersResolver, CreateUserService, IsUniqueEmailValidator],
+  providers: [
+    UsersResolver,
+    CreateUserService,
+    FindAllUsersService,
+    IsUniqueEmailValidator,
+  ],
 })
 export class UsersModule {}
