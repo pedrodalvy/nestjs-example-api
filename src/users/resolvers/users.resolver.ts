@@ -4,6 +4,8 @@ import { CreateUserInput } from '../dto/create-user.input';
 import { CreateUserService } from '../services/create-user.service';
 import { FindAllUsersService } from '../services/find-all-users.service';
 import { FindOneUserService } from '../services/find-one-user.service';
+import { UpdateUserInput } from '../dto/update-user.input';
+import { UpdateUserService } from '../services/update-user.service';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -11,6 +13,7 @@ export class UsersResolver {
     private readonly createUserService: CreateUserService,
     private readonly findAllUsers: FindAllUsersService,
     private readonly findOneUser: FindOneUserService,
+    private readonly updateUserService: UpdateUserService,
   ) {}
 
   @Mutation(() => User)
@@ -30,12 +33,11 @@ export class UsersResolver {
     return this.findOneUser.execute({ id });
   }
 
-  //
-  // @Mutation(() => User)
-  // updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
-  //   return this.usersService.update(updateUserInput.id, updateUserInput);
-  // }
-  //
+  @Mutation(() => User)
+  updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
+    return this.updateUserService.execute(updateUserInput);
+  }
+
   // @Mutation(() => User)
   // removeUser(@Args('id', { type: () => Int }) id: number) {
   //   return this.usersService.remove(id);
