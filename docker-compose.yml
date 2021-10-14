@@ -5,7 +5,7 @@ services:
     build: .
     container_name: nestjs-example-app
     ports:
-      - "${APP_PORT}:${APP_PORT}"
+      - "${APP_PORT}:3000"
     volumes:
       - .:/home/node/app
     depends_on:
