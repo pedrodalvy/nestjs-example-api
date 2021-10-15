@@ -1,4 +1,4 @@
 #!/bin/bash
 
-npm i
-npm run start:dev
+yarn i
+yarn start:dev
