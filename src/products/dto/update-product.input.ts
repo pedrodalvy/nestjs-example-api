@@ -1,4 +1,5 @@
 import { Field, InputType, Int } from '@nestjs/graphql';
+import { Min } from 'class-validator';
 
 @InputType()
 export class UpdateProductInput {
@@ -9,5 +10,6 @@ export class UpdateProductInput {
   description?: string;
 
   @Field(() => Int, { nullable: true })
+  @Min(0)
   qtd?: number;
 }
