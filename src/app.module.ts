@@ -3,8 +3,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import * as ormConfig from './config/ormconfig';
 import { GraphQLModule } from '@nestjs/graphql';
+import { ProductsModule } from './products/app.module';
 
-const modules = [UsersModule];
+const modules = [UsersModule, ProductsModule];
 
 @Module({
   imports: [
