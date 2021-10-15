@@ -5,6 +5,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { hashPasswordTransform } from '../helpers/crypto.helper';
 
 @ObjectType()
 @Entity('users')
@@ -21,8 +22,7 @@ export class User {
   @Column()
   email: string;
 
-  @Field()
-  @Column()
+  @Column({ transformer: hashPasswordTransform, select: false })
   password: string;
 
   @Field()
