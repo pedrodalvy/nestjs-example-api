@@ -22,7 +22,7 @@ export class User {
   @Column()
   email: string;
 
-  @Column({ transformer: hashPasswordTransform, select: false })
+  @Column({ transformer: hashPasswordTransform })
   password: string;
 
   @Field()

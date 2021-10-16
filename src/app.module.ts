@@ -4,8 +4,9 @@ import { UsersModule } from './users/users.module';
 import * as ormConfig from './config/ormconfig';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ProductsModule } from './products/app.module';
+import { AuthModule } from './auth/auth.module';
 
-const modules = [UsersModule, ProductsModule];
+const modules = [UsersModule, ProductsModule, AuthModule];
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ const modules = [UsersModule, ProductsModule];
       autoSchemaFile: 'schema.qgl',
       playground: true,
       installSubscriptionHandlers: true,
+      context: ({ req }) => ({ req }),
     }),
   ],
   controllers: [],
