@@ -4,6 +4,7 @@ import { NestjsQueryTypeOrmModule } from '@nestjs-query/query-typeorm';
 import { Product } from './entities/product.entity';
 import { CreateProductInput } from './dto/create-product.input';
 import { UpdateProductInput } from './dto/update-product.input';
+import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UpdateProductInput } from './dto/update-product.input';
           DTOClass: Product,
           CreateDTOClass: CreateProductInput,
           UpdateDTOClass: UpdateProductInput,
+          guards: [GqlAuthGuard],
         },
       ],
     }),
