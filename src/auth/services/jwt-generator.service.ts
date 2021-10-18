@@ -8,7 +8,11 @@ export class JwtGeneratorService {
   constructor(private readonly jwtService: JwtService) {}
 
   public async execute(user: User): Promise<AuthType> {
-    const payload = { username: user.name, sub: user.id };
+    const payload = {
+      username: user.name,
+      sub: user.id,
+      role: user.role,
+    };
 
     const token = await this.jwtService.signAsync(payload);
 

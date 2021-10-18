@@ -16,17 +16,19 @@ export class UpdateUserInput {
   @IsNumber()
   readonly id: number;
 
-  @Field()
-  @IsNotEmpty()
+  @Field({ nullable: true })
   @IsString()
   @MinLength(5, {
     message: 'O nome deve possuir ao menos $constraint1 caracteres.',
   })
-  readonly name: string;
+  readonly name?: string;
 
-  @Field()
-  @IsNotEmpty()
+  @Field({ nullable: true })
   @IsEmail()
   @Validate(IsUniqueEmailValidator)
-  readonly email: string;
+  readonly email?: string;
+
+  @Field({ nullable: true })
+  @IsString()
+  readonly role?: string;
 }

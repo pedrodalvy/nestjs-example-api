@@ -26,6 +26,10 @@ export class User {
   password: string;
 
   @Field()
+  @Column()
+  role: string;
+
+  @Field()
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 

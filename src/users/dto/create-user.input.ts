@@ -16,13 +16,13 @@ export class CreateUserInput {
   @MinLength(5, {
     message: 'O nome deve possuir ao menos $constraint1 caracteres.',
   })
-  readonly name: string;
+  readonly name!: string;
 
   @Field()
   @IsNotEmpty()
   @IsEmail()
   @Validate(IsUniqueEmailValidator)
-  readonly email: string;
+  readonly email!: string;
 
   @Field()
   @IsNotEmpty()
@@ -30,5 +30,9 @@ export class CreateUserInput {
   @MinLength(6, {
     message: 'O password deve possuir ao menos $constraint1 caracteres',
   })
-  readonly password: string;
+  readonly password!: string;
+
+  @Field()
+  @IsString()
+  readonly role: string;
 }

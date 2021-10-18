@@ -11,8 +11,9 @@ export class CreateUserService {
     name,
     email,
     password,
+    role,
   }: CreateUserInput): Promise<User> {
-    const user = await this.repository.create({ name, email, password });
+    const user = await this.repository.create({ name, email, password, role });
 
     return this.repository.save(user);
   }
