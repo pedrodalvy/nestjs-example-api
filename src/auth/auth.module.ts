@@ -6,6 +6,7 @@ import { UserRepository } from '../users/repositories/user.repository';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { JwtGeneratorService } from './services/jwt-generator.service';
+import { RolesGuard } from './guards/roles.guard';
 
 @Module({
   imports: [
@@ -19,6 +20,12 @@ import { JwtGeneratorService } from './services/jwt-generator.service';
       }),
     }),
   ],
-  providers: [AuthUserService, JwtGeneratorService, AuthResolver, JwtStrategy],
+  providers: [
+    AuthUserService,
+    JwtGeneratorService,
+    AuthResolver,
+    JwtStrategy,
+    RolesGuard,
+  ],
 })
 export class AuthModule {}

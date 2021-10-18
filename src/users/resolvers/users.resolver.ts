@@ -1,9 +1,9 @@
 import {
-  Resolver,
-  Mutation,
   Args,
-  Query,
   Int,
+  Mutation,
+  Query,
+  Resolver,
   Subscription,
 } from '@nestjs/graphql';
 import { User } from '../entities/user.entity';
@@ -11,14 +11,17 @@ import { CreateUserInput } from '../dto/create-user.input';
 import { UpdateUserInput } from '../dto/update-user.input';
 import {
   CreateUserService,
-  FindAllUsersService,
   DeleteUserService,
+  FindAllUsersService,
   FindOneUserService,
   UpdateUserService,
 } from '../services';
 import { PubSub } from 'graphql-subscriptions';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../../auth/guards/gql-auth.guard';
+import { Roles } from '../../common/role/roles.decorator';
+import { Role } from '../../common/role/role.enum';
+import { RolesGuard } from '../../auth/guards/roles.guard';
 
 const pubSub = new PubSub();
 
@@ -32,6 +35,8 @@ export class UsersResolver {
     private readonly deleteUserService: DeleteUserService,
   ) {}
 
+  @Roles(Role.Admin)
+  @UseGuards(GqlAuthGuard, RolesGuard)
   @Mutation(() => User)
   async createUser(
     @Args('createUserInput') createUserInput: CreateUserInput,
@@ -43,7 +48,6 @@ export class UsersResolver {
     return user;
   }
 
-  @UseGuards(GqlAuthGuard)
   @Query(() => [User], { name: 'users' })
   async findAll() {
     return this.findAllUsersService.execute();
@@ -55,13 +59,16 @@ export class UsersResolver {
     return this.findOneUserService.execute({ id });
   }
 
+  @Roles(Role.Admin)
+  @UseGuards(GqlAuthGuard, RolesGuard)
   @UseGuards(GqlAuthGuard)
   @Mutation(() => User)
   async updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
     return this.updateUserService.execute(updateUserInput);
   }
 
-  @UseGuards(GqlAuthGuard)
+  @Roles(Role.Admin)
+  @UseGuards(GqlAuthGuard, RolesGuard)
   @Mutation(() => User)
   removeUser(@Args('id', { type: () => Int }) id: number) {
     return this.deleteUserService.execute({ id });
