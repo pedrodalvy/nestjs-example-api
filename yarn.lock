@@ -878,7 +878,7 @@
     jsonc-parser "3.0.0"
     pluralize "8.0.0"
 
-"@nestjs/testing@^8.0.0":
+"@nestjs/testing@^8.1.1":
   version "8.1.1"
   resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-8.1.1.tgz#bb4b2908c1ae0a2809193052e11a4b3a22e4942a"
   integrity sha512-5vW1xi8z2m0QHdsLIpyyLpgINIiHcHTikYiPl1jde3mI52iLrIpv9+v2aWUrp2aHQJf7+br2M7WqDlVLWRFonA==
@@ -1180,7 +1180,7 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@^27.0.1":
+"@types/jest@^27.0.2":
   version "27.0.2"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-27.0.2.tgz#ac383c4d4aaddd29bbf2b916d8d105c304a5fcd7"
   integrity sha512-4dRxkS/AFX0c5XW6IPMNOydLn2tEhNhJV7DnYK+0bjoJZ+QTmfucBlihX7aoEsh/ocYtkLC73UbnBXBXIxsULA==
