@@ -5,8 +5,9 @@ import * as ormConfig from './config/ormconfig';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ProductsModule } from './products/app.module';
 import { AuthModule } from './auth/auth.module';
+import { InventoryModule } from './inventory/inventory.module';
 
-const modules = [UsersModule, ProductsModule, AuthModule];
+const modules = [UsersModule, ProductsModule, AuthModule, InventoryModule];
 
 @Module({
   imports: [
