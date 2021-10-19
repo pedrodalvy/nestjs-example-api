@@ -6,8 +6,15 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ProductsModule } from './products/products.module';
 import { AuthModule } from './auth/auth.module';
 import { InventoryModule } from './inventory/inventory.module';
+import { SpfModule } from './spf/spf.module';
 
-const modules = [UsersModule, ProductsModule, AuthModule, InventoryModule];
+const modules = [
+  UsersModule,
+  ProductsModule,
+  AuthModule,
+  InventoryModule,
+  SpfModule,
+];
 
 @Module({
   imports: [
