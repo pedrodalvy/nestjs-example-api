@@ -3,14 +3,22 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
-import { FilterableField, IDField } from '@nestjs-query/query-graphql';
+import {
+  FilterableField,
+  IDField,
+  Relation,
+} from '@nestjs-query/query-graphql';
+import { Inventory } from '../../inventory/entities/inventory.entity';
 
 @ObjectType()
 @Entity('products')
+@Relation('inventory', () => Inventory)
 export class Product {
   @IDField(() => ID)
   @PrimaryGeneratedColumn()
@@ -28,6 +36,10 @@ export class Product {
   @Column()
   qtd: number;
 
+  @FilterableField()
+  @Column()
+  code: number;
+
   @Field(() => GraphQLISODateTime)
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
@@ -39,4 +51,9 @@ export class Product {
   @Field(() => GraphQLISODateTime, { nullable: true })
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt?: Date;
+
+  @Field(() => Inventory, { nullable: true })
+  @ManyToOne(() => Inventory, (inventory) => inventory.products)
+  @JoinColumn({ name: 'code', referencedColumnName: 'productCode' })
+  inventory: Inventory;
 }
