@@ -12,4 +12,7 @@ export class CreateProductInput {
   @Field(() => Int)
   @Min(0)
   qtd!: number;
+
+  @Field(() => Int)
+  code!: number;
 }

@@ -12,4 +12,7 @@ export class UpdateProductInput {
   @Field(() => Int, { nullable: true })
   @Min(0)
   qtd?: number;
+
+  @Field(() => Int, { nullable: true })
+  code?: number;
 }

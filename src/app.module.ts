@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import * as ormConfig from './config/ormconfig';
 import { GraphQLModule } from '@nestjs/graphql';
-import { ProductsModule } from './products/app.module';
+import { ProductsModule } from './products/products.module';
 import { AuthModule } from './auth/auth.module';
 import { InventoryModule } from './inventory/inventory.module';
 
