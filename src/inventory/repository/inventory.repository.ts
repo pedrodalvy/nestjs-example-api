@@ -5,6 +5,12 @@ import { Inventory } from '../entities/inventory.entity';
 @Injectable()
 @EntityRepository(Inventory)
 export class InventoryRepository extends Repository<Inventory> {
+  public async findByProductCode(
+    productCode: number,
+  ): Promise<Inventory | undefined> {
+    return await this.findOne({ where: { productCode } });
+  }
+
   public async findOrCreateByProductCode(
     productCode: number,
   ): Promise<Inventory> {

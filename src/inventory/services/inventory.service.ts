@@ -13,4 +13,13 @@ export class InventoryService {
 
     return this.repository.save(inventory);
   }
+
+  public async decrementQuantity({ code }: any): Promise<void> {
+    const inventory = await this.repository.findByProductCode(code);
+
+    if (inventory) {
+      --inventory.quantity;
+      await this.repository.save(inventory);
+    }
+  }
 }
