@@ -1,6 +1,6 @@
 import { CreateUserInput } from '../dto/create-user.input';
 import { User } from '../entities/user.entity';
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { UserRepository } from '../repositories/user.repository';
 
 @Injectable()
@@ -14,7 +14,12 @@ export class CreateUserService {
     role,
   }: CreateUserInput): Promise<User> {
     const user = await this.repository.create({ name, email, password, role });
+    const savedUser = await this.repository.save(user);
 
-    return this.repository.save(user);
+    if (!savedUser) {
+      throw new InternalServerErrorException('Problem to create a user.');
+    }
+
+    return savedUser;
   }
 }
