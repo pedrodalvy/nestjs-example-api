@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { UserRepository } from '../repositories/user.repository';
 import { UpdateUserInput } from '../dto/update-user.input';
 import { User } from '../entities/user.entity';
@@ -13,7 +13,11 @@ export class UpdateUserService {
     email,
     role,
   }: UpdateUserInput): Promise<User> {
-    const user = await this.repository.findOneOrFail(id);
+    const user = await this.repository.findOne(id);
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
 
     user.name = name || user.name;
     user.email = email || user.email;
