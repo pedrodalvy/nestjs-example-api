@@ -1,4 +1,4 @@
 #!/bin/bash
 
-yarn i
+yarn install
 yarn start:dev

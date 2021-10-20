@@ -35,8 +35,6 @@ export class UsersResolver {
     private readonly deleteUserService: DeleteUserService,
   ) {}
 
-  @Roles(Role.Admin)
-  @UseGuards(GqlAuthGuard, RolesGuard)
   @Mutation(() => User)
   async createUser(
     @Args('createUserInput') createUserInput: CreateUserInput,
