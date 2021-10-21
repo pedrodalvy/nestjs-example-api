@@ -1,0 +1,429 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: Float!
+  name: String!
+  email: String!
+  role: String!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Inventory {
+  id: ID!
+  productCode: Float!
+  quantity: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  products: [Product!]!
+}
+
+type Product {
+  id: ID!
+  name: String!
+  description: String!
+  qtd: Float!
+  code: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+  inventory: Inventory!
+}
+
+type DeleteManyResponse {
+  """The number of records deleted."""
+  deletedCount: Int!
+}
+
+type ProductDeleteResponse {
+  id: ID
+  name: String
+  description: String
+  qtd: Float
+  code: Float
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+  inventory: Inventory
+}
+
+type UpdateManyResponse {
+  """The number of records updated."""
+  updatedCount: Int!
+}
+
+type ProductEdge {
+  """The node containing the Product"""
+  node: Product!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+"""Cursor for paging through collections"""
+scalar ConnectionCursor
+
+type PageInfo {
+  """true if paging forward and there are more records."""
+  hasNextPage: Boolean
+
+  """true if paging backwards and there are more records."""
+  hasPreviousPage: Boolean
+
+  """The cursor of the first returned record."""
+  startCursor: ConnectionCursor
+
+  """The cursor of the last returned record."""
+  endCursor: ConnectionCursor
+}
+
+type ProductConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [ProductEdge!]!
+}
+
+type ProductAggregateGroupBy {
+  id: ID
+  name: String
+  qtd: Float
+  code: Float
+}
+
+type ProductCountAggregate {
+  id: Int
+  name: Int
+  qtd: Int
+  code: Int
+}
+
+type ProductSumAggregate {
+  id: Float
+  qtd: Float
+  code: Float
+}
+
+type ProductAvgAggregate {
+  id: Float
+  qtd: Float
+  code: Float
+}
+
+type ProductMinAggregate {
+  id: ID
+  name: String
+  qtd: Float
+  code: Float
+}
+
+type ProductMaxAggregate {
+  id: ID
+  name: String
+  qtd: Float
+  code: Float
+}
+
+type AuthType {
+  user: User!
+  token: String!
+}
+
+type ListaNaturezaDespesa {
+  NaturezaDespesa: String
+  ValorItem: Float
+}
+
+type DadosCredor {
+  CredorIdentificacao: String
+  RazaoSocial: String
+  Email: String
+  Telefone: String
+  CEP: String
+  UF: String
+  Municipio: String
+  Bairro: String
+  Logradouro: String
+  Numero: String
+  Complemento: String
+}
+
+type OrdemBancariaDto {
+  CodigoUG: Float
+  NumeroEmpenho: String
+  NumeroEmpenhoOriginal: String
+  DataEmissaoEmpenho: String
+  DataContabilizacao: String
+  ValorEmpenho: Float
+  TipoEmpenho: String
+  ModalidadeEmpenho: String
+  FuncionalProgramatica: String
+  FonteRecurso: String
+  NumeroContrato: Float
+  VersaoContrato: String
+  CodigoEvento: String
+  ListaNaturezaDespesa: [ListaNaturezaDespesa!]
+  DadosCredor: DadosCredor
+}
+
+type Query {
+  users: [User!]!
+  user(id: Int!): User!
+  product(
+    """The id of the record to find."""
+    id: ID!
+  ): Product
+  products(
+    """Limit or page results."""
+    paging: CursorPaging = {first: 10}
+
+    """Specify to filter the records returned."""
+    filter: ProductFilter = {}
+
+    """Specify to sort results."""
+    sorting: [ProductSort!] = []
+  ): ProductConnection!
+  buscarOB(ordemBancariaInput: OrdemBancariaSpfInput!): [OrdemBancariaDto!]!
+}
+
+input CursorPaging {
+  """Paginate before opaque cursor"""
+  before: ConnectionCursor
+
+  """Paginate after opaque cursor"""
+  after: ConnectionCursor
+
+  """Paginate first"""
+  first: Int
+
+  """Paginate last"""
+  last: Int
+}
+
+input ProductFilter {
+  and: [ProductFilter!]
+  or: [ProductFilter!]
+  id: IDFilterComparison
+  name: StringFieldComparison
+  qtd: NumberFieldComparison
+  code: NumberFieldComparison
+}
+
+input IDFilterComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: ID
+  neq: ID
+  gt: ID
+  gte: ID
+  lt: ID
+  lte: ID
+  like: ID
+  notLike: ID
+  iLike: ID
+  notILike: ID
+  in: [ID!]
+  notIn: [ID!]
+}
+
+input StringFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: String
+  neq: String
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  like: String
+  notLike: String
+  iLike: String
+  notILike: String
+  in: [String!]
+  notIn: [String!]
+}
+
+input NumberFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: Float
+  neq: Float
+  gt: Float
+  gte: Float
+  lt: Float
+  lte: Float
+  in: [Float!]
+  notIn: [Float!]
+  between: NumberFieldComparisonBetween
+  notBetween: NumberFieldComparisonBetween
+}
+
+input NumberFieldComparisonBetween {
+  lower: Float!
+  upper: Float!
+}
+
+input ProductSort {
+  field: ProductSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum ProductSortFields {
+  id
+  name
+  qtd
+  code
+}
+
+"""Sort Directions"""
+enum SortDirection {
+  ASC
+  DESC
+}
+
+"""Sort Nulls Options"""
+enum SortNulls {
+  NULLS_FIRST
+  NULLS_LAST
+}
+
+input OrdemBancariaSpfInput {
+  unidadeGestoraCodigo: Float!
+  exercicio: Float!
+  numeroEmpenho: String
+  numeroEmpenhoOriginal: String
+  fonteRecurso: String
+  dataInicial: String
+  dataFinal: String
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+  setInventoryOnProduct(input: SetInventoryOnProductInput!): Product!
+  removeInventoryFromProduct(input: RemoveInventoryFromProductInput!): Product!
+  createOneProduct(input: CreateOneProductInput!): Product!
+  createManyProducts(input: CreateManyProductsInput!): [Product!]!
+  updateOneProduct(input: UpdateOneProductInput!): Product!
+  updateManyProducts(input: UpdateManyProductsInput!): UpdateManyResponse!
+  deleteOneProduct(input: DeleteOneProductInput!): ProductDeleteResponse!
+  deleteManyProducts(input: DeleteManyProductsInput!): DeleteManyResponse!
+  login(data: AuthInput!): AuthType!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+  role: String!
+}
+
+input UpdateUserInput {
+  id: Float!
+  name: String
+  email: String
+  role: String
+}
+
+input SetInventoryOnProductInput {
+  """The id of the record."""
+  id: ID!
+
+  """The id of relation."""
+  relationId: ID!
+}
+
+input RemoveInventoryFromProductInput {
+  """The id of the record."""
+  id: ID!
+
+  """The id of relation."""
+  relationId: ID!
+}
+
+input CreateOneProductInput {
+  """The record to create"""
+  product: CreateProductInput!
+}
+
+input CreateProductInput {
+  name: String!
+  description: String!
+  qtd: Int!
+  code: Int!
+}
+
+input CreateManyProductsInput {
+  """Array of records to create"""
+  products: [CreateProductInput!]!
+}
+
+input UpdateOneProductInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateProductInput!
+}
+
+input UpdateProductInput {
+  name: String
+  description: String
+  qtd: Int
+  code: Int
+}
+
+input UpdateManyProductsInput {
+  """Filter used to find fields to update"""
+  filter: ProductUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: UpdateProductInput!
+}
+
+input ProductUpdateFilter {
+  and: [ProductUpdateFilter!]
+  or: [ProductUpdateFilter!]
+  id: IDFilterComparison
+  name: StringFieldComparison
+  qtd: NumberFieldComparison
+  code: NumberFieldComparison
+}
+
+input DeleteOneProductInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteManyProductsInput {
+  """Filter to find records to delete"""
+  filter: ProductDeleteFilter!
+}
+
+input ProductDeleteFilter {
+  and: [ProductDeleteFilter!]
+  or: [ProductDeleteFilter!]
+  id: IDFilterComparison
+  name: StringFieldComparison
+  qtd: NumberFieldComparison
+  code: NumberFieldComparison
+}
+
+input AuthInput {
+  email: String!
+  password: String!
+}
+
+type Subscription {
+  userAdded: User!
+}
